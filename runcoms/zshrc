@@ -13,6 +13,7 @@ fi
 # Customize to your needs...
 
 export KEYTIMEOUT=1
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 
 bindkey '^P' up-history
 bindkey '^N' down-history
