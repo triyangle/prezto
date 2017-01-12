@@ -66,16 +66,16 @@ function prompt_paradox_build_prompt {
 
 function prompt_paradox_pwd {
 # IDEA = combine both truncation methods to replace … with first letters of each dir
-  _prompt_paradox_pwd="%(9~|%-4~/…/%3~|%8~)"
+#  _prompt_paradox_pwd="%(9~|%-4~/…/%3~|%8~)"
 
-#  local pwd="${PWD/#$HOME/~}"
-#
-#  if [[ "$pwd" == (#m)[/~] ]]; then
-#    _prompt_paradox_pwd="$MATCH"
-#    unset MATCH
-#  else
-#    _prompt_paradox_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
-#  fi
+  local pwd="${PWD/#$HOME/~}"
+
+  if [[ "$pwd" == (#m)[/~] ]]; then
+    _prompt_paradox_pwd="$MATCH"
+    unset MATCH
+  else
+    _prompt_paradox_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
+  fi
 }
 
 function prompt_paradox_print_elapsed_time {
@@ -164,3 +164,4 @@ ${editor_info[keymap]} '
 }
 
 prompt_paradox_setup "$@"
+# vim: set ft=sh :
