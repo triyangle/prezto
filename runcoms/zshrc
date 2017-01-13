@@ -59,7 +59,7 @@ fi
 
 # fzf settings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_COMPLETION_TRIGGER='**'
+# export FZF_TMUX=0
 
 _gen_fzf_default_opts() {
   local base03="234"
