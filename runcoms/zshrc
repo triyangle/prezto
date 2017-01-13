@@ -11,7 +11,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-eval `dircolors ~/.dircolors`
 export KEYTIMEOUT=1
 
 # fasd settings
@@ -41,6 +40,7 @@ if [[ "$OS" == "Darwin" ]]; then
   bindkey '^[b' backward-word
   bindkey '^[f' forward-word
 elif [[ "$OS" == "Linux" ]]; then
+  eval `dircolors ~/.dircolors`
   bindkey '^[[1;5D' backward-word
   bindkey '^[[1;5C' forward-word
 
