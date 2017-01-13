@@ -149,8 +149,8 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 # Set syntax highlighting styles.
 zstyle ':prezto:module:syntax-highlighting' styles \
   'redirection' 'fg=13,bold' \
-  'single-hyphen-option' 'fg=10' \
-  'double-hyphen-option' 'fg=10' \
+  'single-hyphen-option' 'fg=161' \
+  'double-hyphen-option' 'fg=162' \
   'path' 'fg=cyan,underline' \
   'alias' 'fg=144,bold' \
   'reserved-word' 'fg=167,bold' \
