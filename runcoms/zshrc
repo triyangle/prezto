@@ -15,7 +15,6 @@ export KEYTIMEOUT=1
 
 # fasd settings
 eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias posix-hook)"
-alias v='f -t -e vim -b viminfo'
 bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
 bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
 bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
@@ -39,14 +38,12 @@ OS=`uname`
 if [[ "$OS" == "Darwin" ]]; then
   bindkey '^[b' backward-word
   bindkey '^[f' forward-word
-elif [[ "$OS" == "Linux" ]]; then
+  alias v='f -e vim' # quick opening files with vim
+else
   eval `dircolors ~/.dircolors`
   bindkey '^[[1;5D' backward-word
   bindkey '^[[1;5C' forward-word
-
-  export PATH="/home/william/.linuxbrew/bin:$PATH"
-  export MANPATH="/home/william/.linuxbrew/share/man:$MANPATH"
-  export INFOPATH="/home/william/.linuxbrew/share/info:$INFOPATH"
+  alias v='f -t -e vim -b viminfo'
 
   fpath=(~/.zsh $fpath)
   autoload -U compinit && compinit
