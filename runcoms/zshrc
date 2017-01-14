@@ -52,14 +52,10 @@ elif [[ "$OS" == "Linux" ]]; then
   autoload -U compinit && compinit
 fi
 
-# Uncomment to add newline after every command
-#precmd() {
-#  print ""
-#}
-
 # fzf settings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # export FZF_TMUX=0
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 _gen_fzf_default_opts() {
   local base03="234"
@@ -93,3 +89,8 @@ _gen_fzf_default_opts() {
   #"
 }
 _gen_fzf_default_opts
+
+# Uncomment to add newline after every command
+#precmd() {
+#  print ""
+#}
