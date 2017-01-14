@@ -45,6 +45,10 @@ else
   bindkey '^[[1;5C' forward-word
   alias v='f -t -e vim -b viminfo'
 
+  export PATH="$HOME/.linuxbrew/bin:$PATH"
+  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+
   fpath=(~/.zsh $fpath)
   autoload -U compinit && compinit
 fi
