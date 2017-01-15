@@ -1,9 +1,11 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+OS=`uname`
+
+# Linuxbrew
+if [[ "$OS" == "Linux" ]]; then
+  export PATH="$HOME/.linuxbrew/bin:$PATH"
+  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+fi
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -14,6 +16,7 @@ fi
 export KEYTIMEOUT=1
 
 # fasd settings
+alias v='f -e vim' # quick opening files with vim
 eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias posix-hook)"
 bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
 bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
@@ -34,23 +37,13 @@ bindkey '^e' end-of-line
 bindkey '^a' beginning-of-line
 
 # OS specific settings
-OS=`uname`
 if [[ "$OS" == "Darwin" ]]; then
   bindkey '^[b' backward-word
   bindkey '^[f' forward-word
-  alias v='f -e vim' # quick opening files with vim
 else
   eval `dircolors ~/.dircolors`
   bindkey '^[[1;5D' backward-word
   bindkey '^[[1;5C' forward-word
-  alias v='f -t -e vim -b viminfo'
-
-  export PATH="$HOME/.linuxbrew/bin:$PATH"
-  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-
-  fpath=(~/.zsh $fpath)
-  autoload -U compinit && compinit
 fi
 
 # fzf settings
