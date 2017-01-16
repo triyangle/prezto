@@ -76,11 +76,7 @@ fzf-file-widgethome() {
 }
 
 fzf-file-widgetroot() {
-  if [[ "$OS" == "Linux" ]]; then
-    LBUFFER="${LBUFFER}$(__fselhome "sudo find /")"
-  else
-    LBUFFER="${LBUFFER}$(__fselhome "find /")"
-  fi
+  LBUFFER="${LBUFFER}$(__fselhome "find /")"
   local ret=$?
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
