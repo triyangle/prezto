@@ -141,7 +141,7 @@ zstyle ':prezto:module:prompt' theme 'statusline' -d
 zstyle ':prezto:module:syntax-highlighting' highlighters \
   'main' \
   'brackets' \
-  'pattern' \
+  'pattern'
 #   'line' \
 #   'cursor' \
 #   'root'
