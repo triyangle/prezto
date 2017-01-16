@@ -54,9 +54,8 @@ export FZF_DEFAULT_COMMAND='find .'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 __fselhome() {
-  local cmd="find ~"
   setopt localoptions pipefail 2> /dev/null
-  eval "$cmd | $(__fzfcmd) -m $FZF_CTRL_T_OPTS" | while read item; do
+  eval "$1 | $(__fzfcmd) -m $FZF_CTRL_T_OPTS" | while read item; do
     echo -n "${(q)item} "
   done
   local ret=$?
@@ -69,7 +68,15 @@ __fzfcmd() {
 }
 
 fzf-file-widgethome() {
-  LBUFFER="${LBUFFER}$(__fselhome)"
+  LBUFFER="${LBUFFER}$(__fselhome "find ~")"
+  local ret=$?
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+
+fzf-file-widgetroot() {
+  LBUFFER="${LBUFFER}$(__fselhome "sudo find /")"
   local ret=$?
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
@@ -78,6 +85,9 @@ fzf-file-widgethome() {
 
 zle     -N   fzf-file-widgethome
 bindkey '^ ' fzf-file-widgethome
+
+zle -N fzf-file-widgetroot
+bindkey '^_' fzf-file-widgetroot
 
 _gen_fzf_default_opts() {
   local base03="234"
