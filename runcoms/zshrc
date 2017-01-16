@@ -53,6 +53,32 @@ fi
 export FZF_DEFAULT_COMMAND='find .'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+__fselhome() {
+  local cmd="find ~"
+  setopt localoptions pipefail 2> /dev/null
+  eval "$cmd | $(__fzfcmd) -m $FZF_CTRL_T_OPTS" | while read item; do
+    echo -n "${(q)item} "
+  done
+  local ret=$?
+  echo
+  return $ret
+}
+
+__fzfcmd() {
+  [ ${FZF_TMUX:-1} -eq 1 ] && echo "fzf-tmux -d${FZF_TMUX_HEIGHT:-40%}" || echo "fzf"
+}
+
+fzf-file-widgethome() {
+  LBUFFER="${LBUFFER}$(__fselhome)"
+  local ret=$?
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+
+zle     -N   fzf-file-widgethome
+bindkey '^ ' fzf-file-widgethome
+
 _gen_fzf_default_opts() {
   local base03="234"
   local base02="235"
