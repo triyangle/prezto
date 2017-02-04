@@ -1,7 +1,7 @@
 OS=`uname`
 
 export PATH=~/anaconda3/bin:"$PATH"
-export CS61B_LIB_DIR="/Users/William/CS/61B/CS61B/javalib/*"
+export CS61B_LIB_DIR="/Users/William/school/CS/61B/CS61B/javalib/*"
 export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
 
 # Linuxbrew
