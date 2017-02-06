@@ -117,16 +117,26 @@ function zle-keymap-select {
 
   if [[ "$OS" == "Darwin" ]]; then
     # change cursor shape in iTerm2
-    case $KEYMAP in
-      vicmd)      print -n -- "\E]50;CursorShape=0\C-G";;  # block cursor
-      viins|main) print -n -- "\E]50;CursorShape=1\C-G";;  # line cursor
-    esac
+    if [[ "$KEYMAP" == 'vicmd' ]]; then
+      print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
+    else
+      if [[ "$ZLE_STATE" == *overwrite* ]]; then
+        print -n -- "\E]50;CursorShape=2\C-G"  # underline cursor
+      else
+        print -n -- "\E]50;CursorShape=1\C-G"  # line cursor
+      fi
+    fi
   else
     # check for gnome-terminal too
-    case $KEYMAP in
-      vicmd)      print -n -- "\e[2 q";;  # block cursor
-      viins|main) print -n -- "\e[6 q";;  # line cursor
-    esac
+    if [[ "$KEYMAP" == 'vicmd' ]]; then
+      print -n -- "\e[2 q"  # block cursor
+    else
+      if [[ "$ZLE_STATE" == *overwrite* ]]; then
+        print -n -- "\e[4 q"  # underline cursor
+      else
+        print -n -- "\e[6 q"  # line cursor
+      fi
+    fi
   fi
 
   zle reset-prompt
@@ -138,6 +148,7 @@ zle -N zle-keymap-select
 function zle-line-init {
   # The terminal must be in application mode when ZLE is active for $terminfo
   # values to be valid.
+
   # start cursor in i beam for insert mode
   if [[ "$OS" == "Darwin" ]]; then
     print -n -- "\E]50;CursorShape=1\C-G"  # line cursor
