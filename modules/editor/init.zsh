@@ -1,3 +1,5 @@
+OS=`uname`
+
 #
 # Sets key bindings.
 #
@@ -112,6 +114,23 @@ zle -N editor-info
 # Updates editor information when the keymap changes.
 function zle-keymap-select {
   zle editor-info
+
+  if [[ "$OS" == "Darwin" ]]; then
+    # change cursor shape in iTerm2
+    case $KEYMAP in
+      vicmd)      print -n -- "\E]50;CursorShape=0\C-G";;  # block cursor
+      viins|main) print -n -- "\E]50;CursorShape=1\C-G";;  # line cursor
+    esac
+  else
+    # check for gnome-terminal too
+    case $KEYMAP in
+      vicmd)      print -n -- "\e[2 q";;  # block cursor
+      viins|main) print -n -- "\e[6 q";;  # line cursor
+    esac
+  fi
+
+  zle reset-prompt
+  zle -R
 }
 zle -N zle-keymap-select
 
@@ -119,6 +138,13 @@ zle -N zle-keymap-select
 function zle-line-init {
   # The terminal must be in application mode when ZLE is active for $terminfo
   # values to be valid.
+  # start cursor in i beam for insert mode
+  if [[ "$OS" == "Darwin" ]]; then
+    print -n -- "\E]50;CursorShape=1\C-G"  # line cursor
+  else
+    print -n -- "\e[6 q"  # line cursor
+  fi
+
   if (( $+terminfo[smkx] )); then
     # Enable terminal application mode.
     echoti smkx
@@ -140,6 +166,14 @@ function zle-line-finish {
 
   # Update editor information.
   zle editor-info
+
+  # end in block mode for vim
+  if [[ "$OS" == Darwin ]]; then
+    print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
+  else
+    print -n -- "\e[2 q"  # block cursor
+  fi
+
 }
 zle -N zle-line-finish
 
