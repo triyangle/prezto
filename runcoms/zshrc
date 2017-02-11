@@ -10,7 +10,6 @@ if [[ "$OS" == "Linux" ]]; then
   export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
   export XDG_DATA_DIRS="/home/william/.linuxbrew/share:$XDG_DATA_DIRS"
-  export PATH="/home/william/anaconda3/bin:$PATH"
   export PATH=$PATH:/home/william/.linuxbrew/opt/go/libexec/bin
 fi
 
