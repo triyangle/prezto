@@ -8,10 +8,18 @@ if [[ "$OS" == "Linux" ]]; then
   export XDG_DATA_DIRS="/home/william/.linuxbrew/share:$XDG_DATA_DIRS"
   export PATH=$PATH:/home/william/.linuxbrew/opt/go/libexec/bin
   export CS61B_LIB_DIR="/home/william/school/CS/61B/CS61B/javalib/*"
-  alias rw="find . -type f -exec sed --in-place 's/[[:space:]]\+$//' {} \+"
+
+  function trailing_ws() {
+    find . -type f -name $1 -exec sed --in-place 's/[[:space:]]\+$//' {} \+
+  }
+
 else
   export CS61B_LIB_DIR="/Users/William/school/CS/61B/CS61B/javalib/*"
-  alias rw="find . -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+"
+
+  function trailing_ws() {
+    find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
+  }
+
 fi
 
 export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
@@ -130,6 +138,10 @@ _gen_fzf_default_opts() {
   #"
 }
 _gen_fzf_default_opts
+
+function expand_tabs() {
+  find . -name $1 ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+}
 
 # Uncomment to add newline after every command
 #precmd() {
