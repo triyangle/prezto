@@ -35,6 +35,9 @@ fi
 # Customize to your needs...
 export KEYTIMEOUT=1
 
+alias tws='trailing_ws'
+alias et='expand_tabs'
+
 # fasd settings
 alias v='f -e vim' # quick opening files with vim
 eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias posix-hook)"
