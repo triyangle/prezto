@@ -20,6 +20,8 @@ else
     find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
   }
 
+  alias bt='battery-time'
+  alias bp='battery-percentage'
 fi
 
 export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
