@@ -8,8 +8,10 @@ if [[ "$OS" == "Linux" ]]; then
   export XDG_DATA_DIRS="/home/william/.linuxbrew/share:$XDG_DATA_DIRS"
   export PATH=$PATH:/home/william/.linuxbrew/opt/go/libexec/bin
   export CS61B_LIB_DIR="/home/william/school/CS/61B/CS61B/javalib/*"
+  alias rw="find . -type f -name '*.txt' -exec sed --in-place 's/[[:space:]]\+$//' {} \+"
 else
   export CS61B_LIB_DIR="/Users/William/school/CS/61B/CS61B/javalib/*"
+  alias rw="find . -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+"
 fi
 
 export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
