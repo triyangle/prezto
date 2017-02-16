@@ -27,6 +27,8 @@ fi
 export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
 export PATH=~/anaconda3/bin:"$PATH"
 
+source $HOME/dotfiles/k/k.sh
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
