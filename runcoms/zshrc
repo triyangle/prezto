@@ -150,6 +150,11 @@ function expand_tabs() {
   find . -name $1 ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 }
 
+function chpwd() {
+  emulate -L zsh
+  k
+}
+
 # Uncomment to add newline after every command
 #precmd() {
 #  print ""
