@@ -175,9 +175,6 @@ function zle-line-finish {
     echoti rmkx
   fi
 
-  # Update editor information.
-  zle editor-info
-
   # end in block mode for vim
   if [[ "$OS" == Darwin ]]; then
     print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
@@ -185,6 +182,8 @@ function zle-line-finish {
     print -n -- "\e[2 q"  # block cursor
   fi
 
+  # Editor info is not updated as it causes unnecessary refresh in previous prompt.
+  # See discussion here: https://github.com/zsh-users/prezto/pull/17
 }
 zle -N zle-line-finish
 
