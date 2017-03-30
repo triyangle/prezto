@@ -156,6 +156,8 @@ function chpwd() {
   k
 }
 
+source $HOME/dotfiles/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+
 # Uncomment to add newline after every command
 #precmd() {
 #  print ""
