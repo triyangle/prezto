@@ -1,9 +1,33 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+OS=`uname`
+
+# Linuxbrew
+if [[ "$OS" == "Linux" ]]; then
+  export PATH="$HOME/.linuxbrew/bin:$PATH"
+  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+  export XDG_DATA_DIRS="/home/william/.linuxbrew/share:$XDG_DATA_DIRS"
+  export PATH=$PATH:/home/william/.linuxbrew/opt/go/libexec/bin
+  export CS61B_LIB_DIR="/home/william/school/CS/61B/CS61B/javalib/*"
+
+  function trailing_ws() {
+    find . -type f -name $1 -exec sed --in-place 's/[[:space:]]\+$//' {} \+
+  }
+
+else
+  export CS61B_LIB_DIR="/Users/William/school/CS/61B/CS61B/javalib/*"
+
+  function trailing_ws() {
+    find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
+  }
+
+  alias bt='battery-time'
+  alias bp='battery-percentage'
+fi
+
+export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
+export PATH=~/anaconda3/bin:"$PATH"
+
+source $HOME/dotfiles/k/k.sh
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -11,3 +35,130 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+export KEYTIMEOUT=1
+
+alias tws='trailing_ws'
+alias et='expand_tabs'
+
+# fasd settings
+alias v='f -e vim' # quick opening files with vim
+eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias posix-hook)"
+bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
+bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
+bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
+
+# Autosuggest settings
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
+export ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^d' kill-word
+bindkey '^r' history-incremental-search-backward
+bindkey '^k' kill-line
+bindkey '^e' end-of-line
+bindkey '^a' beginning-of-line
+
+# OS specific settings
+if [[ "$OS" == "Darwin" ]]; then
+  bindkey '^[b' backward-word
+  bindkey '^[f' forward-word
+else
+  eval `dircolors ~/.dircolors`
+  bindkey '^[[1;5D' backward-word
+  bindkey '^[[1;5C' forward-word
+fi
+
+# fzf settings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export FZF_TMUX=0
+export FZF_DEFAULT_COMMAND='find .'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+__fselhome() {
+  setopt localoptions pipefail 2> /dev/null
+  eval "$1 | $(__fzfcmd) -m $FZF_CTRL_T_OPTS" | while read item; do
+    echo -n "${(q)item} "
+  done
+  local ret=$?
+  echo
+  return $ret
+}
+
+__fzfcmd() {
+  [ ${FZF_TMUX:-1} -eq 1 ] && echo "fzf-tmux -d${FZF_TMUX_HEIGHT:-40%}" || echo "fzf"
+}
+
+fzf-file-widgethome() {
+  LBUFFER="${LBUFFER}$(__fselhome "find ~")"
+  local ret=$?
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+
+fzf-file-widgetroot() {
+  LBUFFER="${LBUFFER}$(__fselhome "find /")"
+  local ret=$?
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+
+zle     -N   fzf-file-widgethome
+bindkey '^ ' fzf-file-widgethome
+
+zle -N fzf-file-widgetroot
+bindkey '^_' fzf-file-widgetroot
+
+_gen_fzf_default_opts() {
+  local base03="234"
+  local base02="235"
+  local base01="240"
+  local base00="241"
+  local base0="244"
+  local base1="245"
+  local base2="254"
+  local base3="230"
+  local yellow="136"
+  local orange="166"
+  local red="160"
+  local magenta="125"
+  local violet="61"
+  local blue="33"
+  local cyan="37"
+  local green="64"
+
+  # Comment and uncomment below for the light theme.
+
+  # Solarized Dark color scheme for fzf
+  export FZF_DEFAULT_OPTS="
+    --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
+    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
+  "
+  ## Solarized Light color scheme for fzf
+  #export FZF_DEFAULT_OPTS="
+  #  --color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
+  #  --color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
+  #"
+}
+_gen_fzf_default_opts
+
+function expand_tabs() {
+  find . -name $1 ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+}
+
+function chpwd() {
+  emulate -L zsh
+  k
+}
+
+source $HOME/dotfiles/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+
+# Uncomment to add newline after every command
+#precmd() {
+#  print ""
+#}

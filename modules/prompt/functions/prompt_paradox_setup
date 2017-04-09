@@ -21,6 +21,15 @@ _prompt_paradox_current_bg='NONE'
 _prompt_paradox_segment_separator=''
 _prompt_paradox_start_time=$SECONDS
 
+# Prints the first non-empty string in the arguments array.
+function old_coalesce {
+  for arg in $argv; do
+    print "$arg"
+    return 0
+  done
+  return 1
+}
+
 function prompt_paradox_start_segment {
   local bg fg
   [[ -n "$1" ]] && bg="%K{$1}" || bg="%k"
@@ -28,7 +37,7 @@ function prompt_paradox_start_segment {
   if [[ "$_prompt_paradox_current_bg" != 'NONE' && "$1" != "$_prompt_paradox_current_bg" ]]; then
     print -n " $bg%F{$_prompt_paradox_current_bg}$_prompt_paradox_segment_separator$fg "
   else
-    print -n "$bg$fg "
+    print -n "$bg$fg"
   fi
   _prompt_paradox_current_bg="$1"
   [[ -n "$3" ]] && print -n "$3"
@@ -45,7 +54,7 @@ function prompt_paradox_end_segment {
 }
 
 function prompt_paradox_build_prompt {
-  prompt_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{blue}%n%F{red}@%F{green}%m%f'
+  prompt_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}%j⚙ :)%F{blue}%n%F{red}@%F{green}%m%f'
   prompt_paradox_start_segment blue black '$_prompt_paradox_pwd'
 
   if [[ -n "$git_info" ]]; then
@@ -60,6 +69,9 @@ function prompt_paradox_build_prompt {
 }
 
 function prompt_paradox_pwd {
+# IDEA = combine both truncation methods to replace … with first letters of each dir
+#  _prompt_paradox_pwd="%(9~|%-4~/…/%3~|%8~)"
+
   local pwd="${PWD/#$HOME/~}"
 
   if [[ "$pwd" == (#m)[/~] ]]; then
@@ -145,7 +157,7 @@ function prompt_paradox_setup {
   zstyle ':prezto:module:git:info:unmerged' format ' ═'
   zstyle ':prezto:module:git:info:untracked' format ' ?'
   zstyle ':prezto:module:git:info:keys' format \
-    'ref' '$(coalesce "%b" "%p" "%c")' \
+    'ref' '$(old_coalesce "%b" "%p" "%c")' \
     'status' '%s%D%A%B%S%a%d%m%r%U%u'
 
   # %v - virtualenv name.
@@ -154,9 +166,10 @@ function prompt_paradox_setup {
   # Define prompts.
   PROMPT='
 ${(e)$(prompt_paradox_build_prompt)}
- ${editor_info[keymap]} '
+${editor_info[keymap]} '
   RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
 prompt_paradox_setup "$@"
+# vim: set ft=sh :

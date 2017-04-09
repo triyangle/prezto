@@ -74,3 +74,4 @@ function prompt_giddie_setup {
 }
 
 prompt_giddie_setup "$@"
+# vim: set ft=sh :
