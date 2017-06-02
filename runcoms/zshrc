@@ -3,6 +3,7 @@ OS=`uname`
 # Linuxbrew
 if [[ "$OS" == "Linux" ]]; then
   export PATH="$HOME/.linuxbrew/bin:$PATH"
+  export PATH="/home/william/.linuxbrew/sbin:$PATH"
   export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
   export XDG_DATA_DIRS="/home/william/.linuxbrew/share:$XDG_DATA_DIRS"
