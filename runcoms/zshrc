@@ -16,6 +16,7 @@ if [[ "$OS" == "Linux" ]]; then
 
 else
   export CS61B_LIB_DIR="/Users/William/school/CS/61B/CS61B/javalib/*"
+  export PATH=/usr/local/anaconda3/bin:"$PATH"
 
   function trailing_ws() {
     find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
@@ -26,7 +27,6 @@ else
 fi
 
 export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
-export PATH=~/anaconda3/bin:"$PATH"
 
 source $HOME/dotfiles/k/k.sh
 
