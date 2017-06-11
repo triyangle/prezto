@@ -3,11 +3,13 @@ OS=`uname`
 # Linuxbrew
 if [[ "$OS" == "Linux" ]]; then
   export PATH="$HOME/.linuxbrew/bin:$PATH"
+  export PATH="/home/william/.linuxbrew/sbin:$PATH"
   export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
   export XDG_DATA_DIRS="/home/william/.linuxbrew/share:$XDG_DATA_DIRS"
   export PATH=$PATH:/home/william/.linuxbrew/opt/go/libexec/bin
   export CS61B_LIB_DIR="/home/william/school/CS/61B/CS61B/javalib/*"
+  export PATH=~/anaconda3/bin:"$PATH"
 
   function trailing_ws() {
     find . -type f -name $1 -exec sed --in-place 's/[[:space:]]\+$//' {} \+
@@ -15,6 +17,7 @@ if [[ "$OS" == "Linux" ]]; then
 
 else
   export CS61B_LIB_DIR="/Users/William/school/CS/61B/CS61B/javalib/*"
+  export PATH=/usr/local/anaconda3/bin:"$PATH"
 
   function trailing_ws() {
     find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
@@ -25,7 +28,6 @@ else
 fi
 
 export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
-export PATH=~/anaconda3/bin:"$PATH"
 
 source $HOME/dotfiles/k/k.sh
 
