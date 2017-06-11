@@ -1,14 +1,15 @@
 OS=`uname`
+export HOMEBREW_BUILD_FROM_SOURCE=1
 
 # Linuxbrew
 if [[ "$OS" == "Linux" ]]; then
   export PATH="$HOME/.linuxbrew/bin:$PATH"
-  export PATH="/home/william/.linuxbrew/sbin:$PATH"
+  export PATH="/home/will/.linuxbrew/sbin:$PATH"
   export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-  export XDG_DATA_DIRS="/home/william/.linuxbrew/share:$XDG_DATA_DIRS"
-  export PATH=$PATH:/home/william/.linuxbrew/opt/go/libexec/bin
-  export CS61B_LIB_DIR="/home/william/school/CS/61B/CS61B/javalib/*"
+  export XDG_DATA_DIRS="/home/will/.linuxbrew/share:$XDG_DATA_DIRS"
+  export PATH=$PATH:/home/will/.linuxbrew/opt/go/libexec/bin
+  export CS61B_LIB_DIR="/home/will/school/CS/61B/CS61B/javalib/*"
   export PATH=~/anaconda3/bin:"$PATH"
 
   function trailing_ws() {
@@ -164,3 +165,11 @@ source $HOME/dotfiles/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 #precmd() {
 #  print ""
 #}
+
+function wcd() {
+  cd $(python3 ~/wcd.py $1)
+}
+
+function wvim() {
+  vim $(python3 ~/wcd.py $1)
+}

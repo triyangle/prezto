@@ -142,16 +142,16 @@ function zle-keymap-select {
       fi
     fi
   else
-    # check for gnome-terminal too
-    if [[ "$KEYMAP" == 'vicmd' ]]; then
-      print -n -- "\e[2 q"  # block cursor
-    else
-      if [[ "$ZLE_STATE" == *overwrite* ]]; then
-        print -n -- "\e[4 q"  # underline cursor
-      else
-        print -n -- "\e[6 q"  # line cursor
-      fi
-    fi
+#    # check for gnome-terminal too
+#    if [[ "$KEYMAP" == 'vicmd' ]]; then
+#      print -n -- "\e[2 q"  # block cursor
+#    else
+#      if [[ "$ZLE_STATE" == *overwrite* ]]; then
+#        print -n -- "\e[4 q"  # underline cursor
+#      else
+#        print -n -- "\e[6 q"  # line cursor
+#      fi
+#    fi
   fi
 
   zle reset-prompt
@@ -168,7 +168,7 @@ function zle-line-init {
   if [[ "$OS" == "Darwin" ]]; then
     print -n -- "\E]50;CursorShape=1\C-G"  # line cursor
   else
-    print -n -- "\e[6 q"  # line cursor
+    #print -n -- "\e[6 q"  # line cursor
   fi
 
   if (( $+terminfo[smkx] )); then
@@ -194,7 +194,7 @@ function zle-line-finish {
   if [[ "$OS" == Darwin ]]; then
     print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
   else
-    print -n -- "\e[2 q"  # block cursor
+    #print -n -- "\e[2 q"  # block cursor
   fi
 
   # Editor info is not updated as it causes unnecessary refresh in previous prompt.
