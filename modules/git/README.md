@@ -65,7 +65,7 @@ Aliases are enabled by default. You can disable them with:
   - `gcam` stages all modified and deleted files, and records changes to the repository with the given message.
   - `gco` checks out a branch or paths to work tree.
   - `gcO` checks out hunks from the index or the tree interactively.
-  - `gcf` amends the tip of the current branch using the same log message as *HEAD*. 
+  - `gcf` amends the tip of the current branch using the same log message as *HEAD*.
   - `gcSf` amends the tip of the current branch using the same log message as *HEAD*. (Signed)
   - `gcF` amends the tip of the current branch.
   - `gcSF` amends the tip of the current branch. (Signed)
@@ -102,6 +102,7 @@ Aliases are enabled by default. You can disable them with:
   - `gf` downloads objects and references from another repository.
   - `gfa` downloads objects and references from all remote repositories.
   - `gfc` clones a repository into a new directory.
+  - `gfcr` clones a repository into a new directory including all submodules.
   - `gfm` fetches from and merges with another repository or local branch.
   - `gfr` fetches from and rebases on another repository or local branch.
 
@@ -388,6 +389,8 @@ The following contexts must be enabled with the following zstyle:
 | rebase               |    value    | Rebasing
 | rebase-interactive   |    value    | Rebasing interactively
 | rebase-merge         |    value    | Rebasing merge
+| revert               |    value    | Reverting
+| revert-sequence      |    value    | Reverting sequence
 
 First, format the repository state attributes. For example, to format the branch
 and remote names, define the following styles.
