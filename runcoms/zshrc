@@ -29,7 +29,8 @@ fi
 
 export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
 
-source $HOME/dotfiles/k/k.sh
+source $HOME/dotfiles/submodules/k/k.sh
+source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -157,8 +158,6 @@ function chpwd() {
   emulate -L zsh
   k
 }
-
-source $HOME/dotfiles/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
 # Uncomment to add newline after every command
 #precmd() {
