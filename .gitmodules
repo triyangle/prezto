@@ -28,3 +28,6 @@
 [submodule "modules/prompt/external/statusline"]
 	path = modules/prompt/external/statusline
 	url = https://github.com/triyangle/statusline.git
+[submodule "modules/prompt/external/async"]
+	path = modules/prompt/external/async
+	url = https://github.com/mafredri/zsh-async.git
