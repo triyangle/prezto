@@ -7,8 +7,8 @@ if [[ "$OS" == "Linux" ]]; then
   export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
   export XDG_DATA_DIRS="$HOME/.linuxbrew/share:$XDG_DATA_DIRS"
-  export PATH=$PATH:$HOME/.linuxbrew/opt/go/libexec/bin
-  #export CS61B_LIB_DIR="/home/william/school/CS/61B/CS61B/javalib/*"
+  export PATH=$PATH:$HOME.linuxbrew/opt/go/libexec/bin
+  export CS61B_LIB_DIR="$HOME/school/CS/61B/CS61B/javalib/*"
   export PATH=~/anaconda3/bin:"$PATH"
 
   function trailing_ws() {
@@ -16,7 +16,7 @@ if [[ "$OS" == "Linux" ]]; then
   }
 
 else
-  export CS61B_LIB_DIR="/Users/William/school/CS/61B/CS61B/javalib/*"
+  export CS61B_LIB_DIR="$HOME/school/CS/61B/CS61B/javalib/*"
   export PATH=/usr/local/anaconda3/bin:"$PATH"
 
   function trailing_ws() {
