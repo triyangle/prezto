@@ -3,12 +3,12 @@ OS=`uname`
 # Linuxbrew
 if [[ "$OS" == "Linux" ]]; then
   export PATH="$HOME/.linuxbrew/bin:$PATH"
-  export PATH="/home/william/.linuxbrew/sbin:$PATH"
+  export PATH="$HOME/.linuxbrew/sbin:$PATH"
   export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-  export XDG_DATA_DIRS="/home/william/.linuxbrew/share:$XDG_DATA_DIRS"
-  export PATH=$PATH:/home/william/.linuxbrew/opt/go/libexec/bin
-  export CS61B_LIB_DIR="/home/william/school/CS/61B/CS61B/javalib/*"
+  export XDG_DATA_DIRS="$HOME/.linuxbrew/share:$XDG_DATA_DIRS"
+  export PATH=$PATH:$HOME/.linuxbrew/opt/go/libexec/bin
+  #export CS61B_LIB_DIR="/home/william/school/CS/61B/CS61B/javalib/*"
   export PATH=~/anaconda3/bin:"$PATH"
 
   function trailing_ws() {
