@@ -141,16 +141,16 @@ function zle-keymap-select {
   zle editor-info
 
   if [[ "$OS" == "Darwin" ]]; then
-    # change cursor shape in iTerm2
-    if [[ "$KEYMAP" == 'vicmd' ]]; then
-      print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
-    else
-      if [[ "$ZLE_STATE" == *overwrite* ]]; then
-        print -n -- "\E]50;CursorShape=2\C-G"  # underline cursor
-      else
-        print -n -- "\E]50;CursorShape=1\C-G"  # line cursor
-      fi
-    fi
+  #   # change cursor shape in iTerm2
+  #   if [[ "$KEYMAP" == 'vicmd' ]]; then
+  #     print -n -- "\ePtmux;\e\e[2 q\e\\"  # block cursor
+  #   else
+  #     if [[ "$ZLE_STATE" == *overwrite* ]]; then
+  #       print -n -- "\ePtmux;\e\e[4 q\e\\"  # underline cursor
+  #     else
+  #       print -n -- "\ePtmux;\e\e[6 q\e\\"  # line cursor
+  #     fi
+  #   fi
   else
     # check for gnome-terminal too
     if [[ "$KEYMAP" == 'vicmd' ]]; then
@@ -176,7 +176,7 @@ function zle-line-init {
 
   # start cursor in i beam for insert mode
   if [[ "$OS" == "Darwin" ]]; then
-    print -n -- "\E]50;CursorShape=1\C-G"  # line cursor
+  #   print -n -- "\ePtmux;\e\e[6 q\e\\"  # line cursor
   else
     print -n -- "\e[6 q"  # line cursor
   fi
@@ -202,7 +202,7 @@ function zle-line-finish {
 
   # end in block mode for vim
   if [[ "$OS" == Darwin ]]; then
-    print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
+  #   print -n -- "\ePtmux;\e\e[2 q\e\\"  # block cursor
   else
     print -n -- "\e[2 q"  # block cursor
   fi
