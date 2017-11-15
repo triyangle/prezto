@@ -249,13 +249,13 @@ zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 # Tmux
 #
 
-if [[ ! ("$SHLVL" -eq 1 && ! -o LOGIN) ]]; then
-    # Auto start a session when Zsh is launched in a local terminal.
-    # zstyle ':prezto:module:tmux:auto-start' local 'yes'
-
-    # Auto start a session when Zsh is launched in a SSH connection.
-    zstyle ':prezto:module:tmux:auto-start' remote 'yes'
-fi
+# if [[ ! ("$SHLVL" -eq 1 && ! -o LOGIN) ]]; then
+#     # Auto start a session when Zsh is launched in a local terminal.
+#     zstyle ':prezto:module:tmux:auto-start' local 'yes'
+#
+#     # Auto start a session when Zsh is launched in a SSH connection.
+#     zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+# fi
 
 # Integrate with iTerm2.
 zstyle ':prezto:module:tmux:iterm' integrate 'yes'
