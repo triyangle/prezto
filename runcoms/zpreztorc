@@ -47,6 +47,7 @@ if [[ "$OS" == "Darwin" ]]; then
     'fancy-ctrl-z' \
     'homebrew' \
     'osx' \
+    'python' \
     'syntax-highlighting' \
     'history-substring-search' \
     'prompt'
@@ -66,6 +67,7 @@ else
     'fasd' \
     'fancy-ctrl-z' \
     'homebrew' \
+    'python' \
     'syntax-highlighting' \
     'history-substring-search' \
     'prompt'
@@ -181,6 +183,8 @@ zstyle ':prezto:module:prompt' theme 'statusline' -d
 
 # Automatically initialize virtualenvwrapper if pre-requisites are met.
 # zstyle ':prezto:module:python:virtualenv' initialize 'yes'
+
+zstyle ':prezto:module:python' conda-init 'on'
 
 #
 # Screen
