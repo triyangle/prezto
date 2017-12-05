@@ -105,7 +105,7 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 zstyle ':prezto:module:editor' dot-expansion 'yes'
 
 # Allow the zsh prompt context to be shown.
-#zstyle ':prezto:module:editor' ps-context 'yes'
+zstyle ':prezto:module:editor' ps-context 'yes'
 
 #
 # Git
@@ -246,25 +246,25 @@ zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
 zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 
 # Set the terminal multiplexer title format.
-# zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
+zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
 
 #
 # Tmux
 #
 
-# if [[ ! ("$SHLVL" -eq 1 && ! -o LOGIN) ]]; then
-#     # Auto start a session when Zsh is launched in a local terminal.
-#     zstyle ':prezto:module:tmux:auto-start' local 'yes'
-#
-#     # Auto start a session when Zsh is launched in a SSH connection.
-#     zstyle ':prezto:module:tmux:auto-start' remote 'yes'
-# fi
+if [[ ! ("$SHLVL" -eq 1 && ! -o LOGIN) ]]; then
+    # Auto start a session when Zsh is launched in a local terminal.
+    zstyle ':prezto:module:tmux:auto-start' local 'yes'
+
+    # Auto start a session when Zsh is launched in a SSH connection.
+    zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+fi
 
 # Integrate with iTerm2.
 # zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 
 # Set the default session name:
-# zstyle ':prezto:module:tmux:session' name 'YOUR DEFAULT SESSION NAME'
+zstyle ':prezto:module:tmux:session' name '0'
 
 #
 # Utility
