@@ -63,7 +63,6 @@ else
     'git' \
     'archive' \
     'tmux' \
-    'autosuggestions' \
     'fasd' \
     'fancy-ctrl-z' \
     'homebrew' \

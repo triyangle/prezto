@@ -140,7 +140,7 @@ zle -N zle-reset-prompt
 function zle-keymap-select {
   zle editor-info
 
-  if [[ "$OS" == "Darwin" ]]; then
+  # if [[ "$OS" == "Darwin" ]]; then
   #   # change cursor shape in iTerm2
   #   if [[ "$KEYMAP" == 'vicmd' ]]; then
   #     print -n -- "\ePtmux;\e\e[2 q\e\\"  # block cursor
@@ -151,18 +151,18 @@ function zle-keymap-select {
   #       print -n -- "\ePtmux;\e\e[6 q\e\\"  # line cursor
   #     fi
   #   fi
-  else
-    # check for gnome-terminal too
-    if [[ "$KEYMAP" == 'vicmd' ]]; then
-      print -n -- "\e[2 q"  # block cursor
-    else
-      if [[ "$ZLE_STATE" == *overwrite* ]]; then
-        print -n -- "\e[4 q"  # underline cursor
-      else
-        print -n -- "\e[6 q"  # line cursor
-      fi
-    fi
-  fi
+  # else
+  #   # check for gnome-terminal too
+  #   if [[ "$KEYMAP" == 'vicmd' ]]; then
+  #     print -n -- "\e[2 q"  # block cursor
+  #   else
+  #     if [[ "$ZLE_STATE" == *overwrite* ]]; then
+  #       print -n -- "\e[4 q"  # underline cursor
+  #     else
+  #       print -n -- "\e[6 q"  # line cursor
+  #     fi
+  #   fi
+  # fi
 
   zle reset-prompt
   zle -R
@@ -175,16 +175,16 @@ function zle-line-init {
   # values to be valid.
 
   # start cursor in i beam for insert mode
-  if [[ "$OS" == "Darwin" ]]; then
+  # if [[ "$OS" == "Darwin" ]]; then
   #   print -n -- "\ePtmux;\e\e[6 q\e\\"  # line cursor
-  else
-    print -n -- "\e[6 q"  # line cursor
-  fi
-
-  if (( $+terminfo[smkx] )); then
-    # Enable terminal application mode.
-    echoti smkx
-  fi
+  # else
+  #   print -n -- "\e[6 q"  # line cursor
+  # fi
+  #
+  # if (( $+terminfo[smkx] )); then
+  #   # Enable terminal application mode.
+  #   echoti smkx
+  # fi
 
   # Update editor information.
   zle editor-info
@@ -201,11 +201,11 @@ function zle-line-finish {
   fi
 
   # end in block mode for vim
-  if [[ "$OS" == Darwin ]]; then
+  # if [[ "$OS" == Darwin ]]; then
   #   print -n -- "\ePtmux;\e\e[2 q\e\\"  # block cursor
-  else
-    print -n -- "\e[2 q"  # block cursor
-  fi
+  # else
+  #   print -n -- "\e[2 q"  # block cursor
+  # fi
 
   # Editor info is not updated as it causes unnecessary refresh in previous prompt.
   # See discussion here: https://github.com/zsh-users/prezto/pull/17
