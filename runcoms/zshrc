@@ -33,7 +33,7 @@ source $HOME/dotfiles/submodules/k/k.sh
 source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
 # Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+if [[ -t 0 && -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
