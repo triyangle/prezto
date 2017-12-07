@@ -41,6 +41,7 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'archive' \
   'tmux' \
+  'autosuggestions' \
   'fasd' \
   'fancy-ctrl-z' \
   'homebrew' \
