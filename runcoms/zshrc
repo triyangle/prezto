@@ -1,31 +1,18 @@
 OS=`uname`
 
 # Linuxbrew
-if [[ "$OS" == "Linux" ]]; then
-  export PATH="$HOME/.linuxbrew/bin:$PATH"
-  export PATH="$HOME/.linuxbrew/sbin:$PATH"
-  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-  export XDG_DATA_DIRS="$HOME/.linuxbrew/share:$XDG_DATA_DIRS"
-  export PATH=$PATH:$HOME.linuxbrew/opt/go/libexec/bin
-  export CS61B_LIB_DIR="$HOME/school/CS/61B/CS61B/javalib/*"
-  export PATH=~/anaconda3/bin:"$PATH"
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export PATH="$HOME/.linuxbrew/sbin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+export XDG_DATA_DIRS="$HOME/.linuxbrew/share:$XDG_DATA_DIRS"
+export PATH=$PATH:$HOME.linuxbrew/opt/go/libexec/bin
+export CS61B_LIB_DIR="$HOME/school/CS/61B/CS61B/javalib/*"
+export PATH=~/anaconda3/bin:"$PATH"
 
-  function trailing_ws() {
-    find . -type f -name $1 -exec sed --in-place 's/[[:space:]]\+$//' {} \+
-  }
-
-else
-  export CS61B_LIB_DIR="$HOME/school/CS/61B/CS61B/javalib/*"
-  export PATH=/usr/local/anaconda3/bin:"$PATH"
-
-  function trailing_ws() {
-    find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
-  }
-
-  alias bt='battery-time'
-  alias bp='battery-percentage'
-fi
+function trailing_ws() {
+  find . -type f -name $1 -exec sed --in-place 's/[[:space:]]\+$//' {} \+
+}
 
 export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
 
@@ -39,6 +26,7 @@ fi
 
 # Customize to your needs...
 export KEYTIMEOUT=1
+export HISTCONTROL=ignoreboth
 
 alias tws='trailing_ws'
 alias et='expand_tabs'
@@ -65,15 +53,9 @@ bindkey '^k' kill-line
 bindkey '^e' end-of-line
 bindkey '^a' beginning-of-line
 
-# OS specific settings
-if [[ "$OS" == "Darwin" ]]; then
-  bindkey '^[b' backward-word
-  bindkey '^[f' forward-word
-else
-  eval `dircolors ~/.dircolors`
-  bindkey '^[[1;5D' backward-word
-  bindkey '^[[1;5C' forward-word
-fi
+eval `dircolors ~/.dircolors`
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
 
 # fzf settings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
