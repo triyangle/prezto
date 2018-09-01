@@ -165,6 +165,13 @@ zstyle ':prezto:module:python' conda-init 'on'
 # zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
 
 #
+# Ruby
+#
+
+# Auto switch the Ruby version on directory change.
+# zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
+
+#
 # Screen
 #
 
