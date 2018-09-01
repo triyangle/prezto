@@ -1,3 +1,4 @@
+export PATH="/usr/local/opt/node@8/bin:$PATH"
 export CS61B_LIB_DIR="$HOME/school/CS/61B/CS61B/javalib/*"
 export PATH=/usr/local/anaconda3/bin:"$PATH"
 
@@ -9,9 +10,6 @@ alias bt='battery-time'
 alias bp='battery-percentage'
 
 export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
-
-source $HOME/dotfiles/submodules/k/k.sh
-source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
 # Source Prezto.
 if [[ -t 0 && -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -28,7 +26,7 @@ alias tws='trailing_ws'
 alias et='expand_tabs'
 
 # fasd settings
-alias v='f -e vim' # quick opening files with vim
+alias n='f -e nvim' # quick opening files with nvim
 eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias posix-hook)"
 bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
 bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
@@ -139,3 +137,6 @@ function chpwd() {
 #precmd() {
 #  print ""
 #}
+
+source $HOME/dotfiles/submodules/k/k.sh
+source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
