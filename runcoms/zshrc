@@ -12,10 +12,14 @@ function trailing_ws() {
   find . -type f -name $1 -exec sed --in-place 's/[[:space:]]\+$//' {} \+
 }
 
-export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
+function trailing_ws() {
+  find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
+}
 
-source $HOME/dotfiles/submodules/k/k.sh
-source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+alias bt='battery-time'
+alias bp='battery-percentage'
+
+export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
 
 # Source Prezto.
 if [[ -t 0 && -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -26,11 +30,13 @@ fi
 export KEYTIMEOUT=1
 export HISTCONTROL=ignoreboth
 
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 alias tws='trailing_ws'
 alias et='expand_tabs'
 
 # fasd settings
-alias v='f -e vim' # quick opening files with vim
+alias n='f -e nvim' # quick opening files with nvim
 eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias posix-hook)"
 bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
 bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
@@ -143,3 +149,6 @@ function chpwd() {
 #precmd() {
 #  print ""
 #}
+
+source $HOME/dotfiles/submodules/k/k.sh
+source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
