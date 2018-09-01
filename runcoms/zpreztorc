@@ -146,13 +146,6 @@ zstyle ':prezto:module:prompt' theme 'statusline' -d
 # zstyle ':prezto:module:prompt' show-return-val 'yes'
 
 #
-# Ruby
-#
-
-# Auto switch the Ruby version on directory change.
-# zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
-
-#
 # Python
 #
 
@@ -163,6 +156,13 @@ zstyle ':prezto:module:prompt' theme 'statusline' -d
 # zstyle ':prezto:module:python:virtualenv' initialize 'yes'
 
 zstyle ':prezto:module:python' conda-init 'on'
+
+#
+# Ruby
+#
+
+# Auto switch the Ruby version on directory change.
+# zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
 
 #
 # Screen
