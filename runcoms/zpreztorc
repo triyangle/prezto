@@ -36,6 +36,7 @@ zstyle ':prezto:load' pmodule \
   'history' \
   'directory' \
   'spectrum' \
+  'command-not-found' \
   'utility' \
   'completion' \
   'git' \
@@ -149,10 +150,10 @@ zstyle ':prezto:module:prompt' theme 'statusline' -d
 #
 
 # Auto switch the Python virtualenv on directory change.
-# zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
+zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 
 # Automatically initialize virtualenvwrapper if pre-requisites are met.
-# zstyle ':prezto:module:python:virtualenv' initialize 'yes'
+zstyle ':prezto:module:python:virtualenv' initialize 'yes'
 
 zstyle ':prezto:module:python' conda-init 'on'
 
@@ -260,4 +261,4 @@ zstyle ':prezto:module:tmux:session' name '0'
 # Enabled safe options. This aliases cp, ln, mv and rm so that they prompt
 # before deleting or overwriting files. Set to 'no' to disable this safer
 # behavior.
-# zstyle ':prezto:module:utility' safe-ops 'yes'
+zstyle ':prezto:module:utility' safe-ops 'yes'
