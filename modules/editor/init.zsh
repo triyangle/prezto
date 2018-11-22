@@ -149,16 +149,6 @@ function zle-keymap-select {
   #     print -n -- "\e[6 q"  # line cursor
   #   fi
   # fi
-#   # change cursor shape in iTerm2
-#   if [[ "$KEYMAP" == 'vicmd' ]]; then
-#     print -n -- "\ePtmux;\e\e[2 q\e\\"  # block cursor
-#   else
-#     if [[ "$ZLE_STATE" == *overwrite* ]]; then
-#       print -n -- "\ePtmux;\e\e[4 q\e\\"  # underline cursor
-#     else
-#       print -n -- "\ePtmux;\e\e[6 q\e\\"  # line cursor
-#     fi
-#   fi
 
   zle reset-prompt
   zle -R
