@@ -16,8 +16,7 @@ fi
 # Options
 #
 
-# Beep on error in line editor.
-setopt BEEP
+setopt BEEP                     # Beep on error in line editor.
 
 #
 # Variables
@@ -140,6 +139,7 @@ zle -N zle-reset-prompt
 function zle-keymap-select {
   zle editor-info
 
+<<<<<<< HEAD
   # check for gnome-terminal too
   # if [[ "$KEYMAP" == 'vicmd' ]]; then
   #   print -n -- "\e[2 q"  # block cursor
@@ -150,6 +150,18 @@ function zle-keymap-select {
   #     print -n -- "\e[6 q"  # line cursor
   #   fi
   # fi
+=======
+#   # change cursor shape in iTerm2
+#   if [[ "$KEYMAP" == 'vicmd' ]]; then
+#     print -n -- "\ePtmux;\e\e[2 q\e\\"  # block cursor
+#   else
+#     if [[ "$ZLE_STATE" == *overwrite* ]]; then
+#       print -n -- "\ePtmux;\e\e[4 q\e\\"  # underline cursor
+#     else
+#       print -n -- "\ePtmux;\e\e[6 q\e\\"  # line cursor
+#     fi
+#   fi
+>>>>>>> master
 
   zle reset-prompt
   zle -R
@@ -161,8 +173,13 @@ function zle-line-init {
   # The terminal must be in application mode when ZLE is active for $terminfo
   # values to be valid.
 
+<<<<<<< HEAD
   # start cursor in i beam for insert mode
   # print -n -- "\e[6 q"  # line cursor
+=======
+# start cursor in i beam for insert mode
+#   print -n -- "\ePtmux;\e\e[6 q\e\\"  # line cursor
+>>>>>>> master
 
   if (( $+terminfo[smkx] )); then
     # Enable terminal application mode.
@@ -183,8 +200,13 @@ function zle-line-finish {
     echoti rmkx
   fi
 
+<<<<<<< HEAD
   # end in block mode for vim
   # print -n -- "\e[2 q"  # block cursor
+=======
+# end in block mode for vim
+#   print -n -- "\ePtmux;\e\e[2 q\e\\"  # block cursor
+>>>>>>> master
 
   # Editor info is not updated as it causes unnecessary refresh in previous prompt.
   # See discussion here: https://github.com/zsh-users/prezto/pull/17
@@ -265,6 +287,27 @@ function glob-alias {
 }
 zle -N glob-alias
 
+# Toggle the comment character at the start of the line. This is meant to work
+# around a buggy implementation of pound-insert in zsh.
+#
+# This is currently only used for the emacs keys because vi-pound-insert has
+# been reported to work properly.
+function pound-toggle {
+  if [[ "$BUFFER" = '#'* ]]; then
+    # Because of an oddity in how zsh handles the cursor when the buffer size
+    # changes, we need to make this check before we modify the buffer and let
+    # zsh handle moving the cursor back if it's past the end of the line.
+    if [[ $CURSOR != $#BUFFER ]]; then
+      (( CURSOR -= 1 ))
+    fi
+    BUFFER="${BUFFER:1}"
+  else
+    BUFFER="#$BUFFER"
+    (( CURSOR += 1 ))
+  fi
+}
+zle -N pound-toggle
+
 # Reset to default key bindings.
 bindkey -d
 
@@ -300,6 +343,12 @@ if (( $+widgets[history-incremental-pattern-search-backward] )); then
     history-incremental-pattern-search-forward
 fi
 
+# Toggle comment at the start of the line. Note that we use pound-toggle which
+# is similar to pount insert, but meant to work around some issues that were
+# being seen in iTerm.
+bindkey -M emacs "$key_info[Escape];" pound-toggle
+
+
 #
 # Vi Key Bindings
 #
@@ -318,6 +367,9 @@ else
   bindkey -M vicmd "?" history-incremental-search-backward
   bindkey -M vicmd "/" history-incremental-search-forward
 fi
+
+# Toggle comment at the start of the line.
+bindkey -M vicmd "#" vi-pound-insert
 
 #
 # Emacs and Vi Key Bindings

@@ -12,10 +12,15 @@ function trailing_ws() {
   find . -type f -name $1 -exec sed --in-place 's/[[:space:]]\+$//' {} \+
 }
 
-export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
+function trailing_ws() {
+  find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
+}
 
-source $HOME/dotfiles/submodules/k/k.sh
-source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+alias bt='battery-time'
+alias bp='battery-percentage'
+alias ssh='TERM=xterm-256color ssh'
+
+export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
 
 # Source Prezto.
 if [[ -t 0 && -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -26,18 +31,20 @@ fi
 export KEYTIMEOUT=1
 export HISTCONTROL=ignoreboth
 
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 alias tws='trailing_ws'
 alias et='expand_tabs'
 
 # fasd settings
-alias v='f -e vim' # quick opening files with vim
+alias n='f -e nvim' # quick opening files with nvim
 eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias posix-hook)"
 bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
 bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
 bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
 
 # Autosuggest settings
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
+# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 export ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
 bindkey '^P' up-history
@@ -51,7 +58,6 @@ bindkey '^k' kill-line
 bindkey '^e' end-of-line
 bindkey '^a' beginning-of-line
 
-eval `dircolors ~/.dircolors`
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
@@ -97,39 +103,6 @@ bindkey '^ ' fzf-file-widgethome
 zle -N fzf-file-widgetroot
 bindkey '^_' fzf-file-widgetroot
 
-_gen_fzf_default_opts() {
-  local base03="234"
-  local base02="235"
-  local base01="240"
-  local base00="241"
-  local base0="244"
-  local base1="245"
-  local base2="254"
-  local base3="230"
-  local yellow="136"
-  local orange="166"
-  local red="160"
-  local magenta="125"
-  local violet="61"
-  local blue="33"
-  local cyan="37"
-  local green="64"
-
-  # Comment and uncomment below for the light theme.
-
-  # Solarized Dark color scheme for fzf
-  export FZF_DEFAULT_OPTS="
-    --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
-    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
-  "
-  ## Solarized Light color scheme for fzf
-  #export FZF_DEFAULT_OPTS="
-  #  --color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
-  #  --color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
-  #"
-}
-_gen_fzf_default_opts
-
 function expand_tabs() {
   find . -name $1 ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 }
@@ -140,6 +113,24 @@ function chpwd() {
 }
 
 # Uncomment to add newline after every command
-#precmd() {
+# precmd() {
 #  print ""
-#}
+# }
+
+source $HOME/dotfiles/submodules/k/k.sh
+source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+
+export PATH=/usr/local/anaconda3/bin:"$PATH"
+
+function gi() { curl -sL https://www.gitignore.io/api/$@ ;}
+
+_gitignoreio_get_command_list() {
+  curl -sL https://www.gitignore.io/api/list | tr "," "\n"
+}
+
+_gitignoreio () {
+  compset -P '*,'
+  compadd -S '' `_gitignoreio_get_command_list`
+}
+
+compdef _gitignoreio gi
