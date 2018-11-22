@@ -139,7 +139,6 @@ zle -N zle-reset-prompt
 function zle-keymap-select {
   zle editor-info
 
-<<<<<<< HEAD
   # check for gnome-terminal too
   # if [[ "$KEYMAP" == 'vicmd' ]]; then
   #   print -n -- "\e[2 q"  # block cursor
@@ -150,7 +149,6 @@ function zle-keymap-select {
   #     print -n -- "\e[6 q"  # line cursor
   #   fi
   # fi
-=======
 #   # change cursor shape in iTerm2
 #   if [[ "$KEYMAP" == 'vicmd' ]]; then
 #     print -n -- "\ePtmux;\e\e[2 q\e\\"  # block cursor
@@ -161,7 +159,6 @@ function zle-keymap-select {
 #       print -n -- "\ePtmux;\e\e[6 q\e\\"  # line cursor
 #     fi
 #   fi
->>>>>>> master
 
   zle reset-prompt
   zle -R
@@ -173,13 +170,8 @@ function zle-line-init {
   # The terminal must be in application mode when ZLE is active for $terminfo
   # values to be valid.
 
-<<<<<<< HEAD
   # start cursor in i beam for insert mode
   # print -n -- "\e[6 q"  # line cursor
-=======
-# start cursor in i beam for insert mode
-#   print -n -- "\ePtmux;\e\e[6 q\e\\"  # line cursor
->>>>>>> master
 
   if (( $+terminfo[smkx] )); then
     # Enable terminal application mode.
@@ -200,13 +192,8 @@ function zle-line-finish {
     echoti rmkx
   fi
 
-<<<<<<< HEAD
   # end in block mode for vim
   # print -n -- "\e[2 q"  # block cursor
-=======
-# end in block mode for vim
-#   print -n -- "\ePtmux;\e\e[2 q\e\\"  # block cursor
->>>>>>> master
 
   # Editor info is not updated as it causes unnecessary refresh in previous prompt.
   # See discussion here: https://github.com/zsh-users/prezto/pull/17
