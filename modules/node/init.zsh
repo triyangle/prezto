@@ -41,8 +41,10 @@ if [[ -s "$HOME/.nvm/nvm.sh" ]]; then
   lazy_load_nvm "$HOME/.nvm"
 
 # Load package manager installed NVM into the shell session.
-elif (( $+commands[brew] )) && [[ -d "$(brew --prefix nvm 2> /dev/null)" ]]; then
+elif (( $+commands[brew] )) && \
+  [[ -d "${nvm_prefix::="$(brew --prefix 2> /dev/null)"/opt/nvm}" ]]; then
   source "$(brew --prefix nvm)/nvm.sh"
+  unset nvm_prefix
 
 # Load manually installed nodenv into the shell session.
 elif [[ -s "$HOME/.nodenv/bin/nodenv" ]]; then
