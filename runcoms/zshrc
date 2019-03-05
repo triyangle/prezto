@@ -1,11 +1,14 @@
+export TERM="xterm-256color"
+export PATH="$HOME/.bin:$PATH"
+
 # Linuxbrew
-export PATH="$HOME/.linuxbrew/bin:$PATH"
-export PATH="$HOME/.linuxbrew/sbin:$PATH"
-export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-export XDG_DATA_DIRS="$HOME/.linuxbrew/share:$XDG_DATA_DIRS"
-export PATH=$PATH:$HOME.linuxbrew/opt/go/libexec/bin
-export CS61B_LIB_DIR="$HOME/school/CS/61B/CS61B/javalib/*"
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/sbin:$PATH"
+export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
+export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
+export PATH=$PATH:/home/linuxbrew.linuxbrew/opt/go/libexec/bin
+# export CS61B_LIB_DIR="$HOME/school/CS/61B/CS61B/javalib/*"
 
 function trailing_ws() {
   find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
@@ -40,7 +43,7 @@ bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directorie
 
 # Autosuggest settings
 # export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
-export ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
+export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history)
 
 bindkey '^P' up-history
 bindkey '^N' down-history
@@ -53,7 +56,7 @@ bindkey '^k' kill-line
 bindkey '^e' end-of-line
 bindkey '^a' beginning-of-line
 
-eval `dircolors ~/.dircolors`
+# eval `dircolors ~/.dircolors`
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
