@@ -29,6 +29,7 @@ alias tws='trailing_ws'
 alias et='expand_tabs'
 
 # fasd settings
+alias v='f -e vim' # quick opening files with vim
 alias n='f -e nvim' # quick opening files with nvim
 eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias posix-hook)"
 bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
