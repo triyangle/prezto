@@ -1,3 +1,5 @@
+source $HOME/analytics/.shellenv
+
 #
 # Defines environment variables.
 #

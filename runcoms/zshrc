@@ -1,24 +1,30 @@
+# BEGIN flag as new block
+source ~/.gcpdevbox
+source $HOME/analytics/.shellenv
+# END flag as new block
+
 export TERM="xterm-256color"
-export PATH="$HOME/.bin:$PATH"
+# export PATH="$HOME/.bin:$PATH"
 
 # Linuxbrew
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-export PATH="/home/linuxbrew/.linuxbrew/sbin:$PATH"
-export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
-export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
-export PATH=$PATH:/home/linuxbrew.linuxbrew/opt/go/libexec/bin
+# export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+# export PATH="/home/linuxbrew/.linuxbrew/sbin:$PATH"
+# export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
+# export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
+# export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
+# export PATH=$PATH:/home/linuxbrew.linuxbrew/opt/go/libexec/bin
+# export PATH="/usr/bin:/home/triyangle/bin:/usr/sbin:/sbin:/bin:$PATH"
 # export CS61B_LIB_DIR="$HOME/school/CS/61B/CS61B/javalib/*"
 
 function trailing_ws() {
   find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
 }
 
-alias bt='battery-time'
-alias bp='battery-percentage'
+# alias bt='battery-time'
+# alias bp='battery-percentage'
 alias ssh='TERM=xterm-256color ssh'
 
-export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
+# export CLASSPATH="$CLASSPATH:$CS61B_LIB_DIR:./"
 
 # Source Prezto.
 if [[ -t 0 && -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -35,7 +41,8 @@ alias tws='trailing_ws'
 alias et='expand_tabs'
 
 # fasd settings
-alias n='f -e nvim' # quick opening files with nvim
+# alias n='f -e nvim' # quick opening files with nvim
+alias v='f -e vim' # quick opening files with vim
 eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias posix-hook)"
 bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directories)
 bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
@@ -108,7 +115,7 @@ function expand_tabs() {
 
 function chpwd() {
   emulate -L zsh
-  k
+  # k
 }
 
 # Uncomment to add newline after every command
@@ -116,7 +123,7 @@ function chpwd() {
 #  print ""
 # }
 
-source $HOME/dotfiles/submodules/k/k.sh
+# source $HOME/dotfiles/submodules/k/k.sh
 source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
-export PATH=/usr/local/anaconda3/bin:"$PATH"
+# export PATH=/usr/local/anaconda3/bin:"$PATH"
