@@ -1,6 +1,5 @@
 export PATH="/usr/local/opt/node@8/bin:$PATH"
 export CS61B_LIB_DIR="$HOME/school/CS/61B/CS61B/javalib/*"
-export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim
 
 function trailing_ws() {
   find . -iname $1 -type f -exec sed -i '' 's/[[:space:]]\{1,\}$//' {} \+
