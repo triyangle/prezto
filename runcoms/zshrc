@@ -109,7 +109,7 @@ function chpwd() {
 # }
 
 source $HOME/dotfiles/submodules/k/k.sh
-source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+# source $HOME/dotfiles/submodules/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
 export PATH=/usr/local/anaconda3/bin:"$PATH"
 
